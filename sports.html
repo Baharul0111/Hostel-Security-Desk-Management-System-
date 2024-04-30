@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SPORTS</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css" />
+  </head>
+
+  <body>
+    <style>
+        body {
+          background-image: url('background_img.jpg');
+        }
+       
+        </style>
+    <div class="container">
+      <div class="row col-md-6 col-md-offset-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading text-center">
+            <h1>SPORTS</h1>
+          </div>
+          <div class="panel-body">
+            <form action="sports_.php" method="post">
+              <div class="form-group">
+                <label for="dates">Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dates"
+                  name="dates"
+                />
+              </div>
+              <div class="form-group">
+                <label for="names">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="names"
+                  name="names"
+                />
+              </div>
+            
+              <div class="form-group">
+                <label for="room_no">Room Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="room_no"
+                  name="room_no"
+                />
+              </div>
+              <div class="form-group">
+                <label for="mobile_no">Mobile Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mobile_no"
+                  name="mobile_no"
+                />
+              </div>
+              <div class="form-group">
+                <label for="roll_no">Roll Number</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="roll_no"
+                  name="roll_no"
+                />
+              </div>
+              <div class="form-group">
+                <label for="items">Items</label>
+                <div>
+                  <label for="Bat" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Bat"
+                      id="Bat"
+                    />Bat</label
+                  >
+                  <label for="Ball" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Ball"
+                      id="Ball"
+                    />Ball</label
+                  >
+                  <label for="Stumps" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Stumps"
+                      id="Stumps"
+                    />Stumps</label
+                  >
+                  <label for="Football" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Football"
+                      id="Football"
+                    />Football</label
+                  >
+                  <label for="Volleyball" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Volleyball"
+                      id="Volleyball"
+                    />Volleyball</label
+                  >
+                  <label for="Carrom" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Carrom"
+                      id="Carrom"
+                    />Carrom</label
+                  >
+                  <label for="Chess" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Chess"
+                      id="Chess"
+                    />Chess</label
+                  >
+                  <label for="Gloves" class="radio-inline"
+                    ><input
+                      type="radio"
+                      name="items"
+                      value="Gloves"
+                      id="Gloves"
+                    />Gloves</label
+                  >
+                  
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="in_time">IN Time</label>
+                <input
+                  type="time"
+                  class="form-control"
+                  id="in_time"
+                  name="in_time"
+                />
+              </div>
+
+              <input type="submit" class="btn btn-primary" />
+            </form>
+          </div>
+          <div class="panel-footer text-right">
+           
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hostel Management Dashboard</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            height: 100%;
+            width: 100%;
+            background: url("background_img.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        h1{
+            text-align: center;
+            margin-top: 4rem; 
+            zoom: 2;
+            color: white;
+        }
+        .chart-container { margin-top: 20px; padding: 15px; background-color: #f4f4f4; border-radius: 8px; }
+        h2 { color: #333; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 8px 0; }
+      
+        select#querySelector {
+            margin-left: 25%;
+            background-color: goldenrod;
+            zoom: 1.2;
+            font-size: 16px; 
+            padding: 10px; 
+            margin-top: 20px; 
+            width: 50%;
+            display: block;
+            cursor: pointer;
+        }
+        #queryResults{
+            background-color: rgb(161, 71, 209);
+            color: white;
+            font-size: larger;
+            width: 80%;
+            margin-left: 10%;
+            margin-top: 20px; 
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {background-color: #f2f2f2;}
+    </style>
+</head>
+<body>
+
+<div id="dashboard">
+    <h1>Hostel Management Dashboard</h1>
+    <select id="querySelector">
+        <option class="txt" value="">Select a query...</option>
+        <option class="txt" value="in_details_data_view.php">All Data of In_Details Register</option>
+        <option class="txt" value="out_details_data_view.php"> All Data of Out_Details Register</option>
+        <option class="txt" value="parcel_data_view.php"> All Data of Parcel Register</option>
+        <option class="txt" value="sports_data_view.php"> All Data of Sports Items Register</option>
+        <option class="txt" value="studentsOutForLong.php">Students out for more than 10 days</option>
+        <option class="txt" value="frequentSportsUsers.php">Least Used Sports Items</option>
+        <option class="txt" value="getParcelCountPerDay.php">Get Parcel Count Per Day </option>
+        <option class="txt" value="student_moved_more_than_one_time_a_month.php"> student who moved more than one time a month</option>
+        <option class="txt" value="max_parcel_student.php"> Students who Ordered maximum Parcels </option>
+        <option class="txt" value="most_used_sports_item.php"> Most Used Sports Items</option>
+        <option class="txt" value="room_locked.php"> Rooms Currently Locked</option>
+        <option class="txt" value="students_coming.php">  Number of students coming to a hostel per day </option>
+        <option class="txt" value="max_courier_service.php"> Courier Service from where maximum Parcels are Recieved</option>
+        <option class="txt" value="students_who_takes_twice_sports_items.php"> Students who took Sports Items more than once a day</option>
+        <option class="txt" value="busy_sports_items.php"> Busy times for Sports Items</option>
+    </select>
+    <div id="queryResults" class="chart-container"></div>
+</div>
+
+<script>
+    document.getElementById('querySelector').addEventListener('change', function() {
+        const endpoint = this.value;
+        const titleMap = {
+            'in_details_data_view.php': 'All Data of In Details Register',
+            'studentsOutForLong.php': 'Students Out for More Than 10 Days',
+            'frequentSportsUsers.php': 'Frequent Sports Equipment Users',
+            'getParcelCountPerDay.php': 'Get Parcel Count Per Day',
+            'out_details_data_view.php': 'All Data of Out Details Register',
+            'parcel_data_view.php': 'All Data of Parcel Register',
+            'sports_data_view.php': 'All Data of Sports Items Register',
+            'student_moved_more_than_one_time_a_month.php': 'student who moved more than one time a month',
+            'max_parcel_student.php' : 'Students who Ordered maximum Parcels',
+            'most_used_sports_item.php' : 'Most Used Sports Items',
+            'room_locked.php' : 'Rooms Currently Locked',
+            'students_coming.php' : 'Number of students coming to a hostel per day',
+            'max_courier_service.php' : 'Courier Service from where maximum Parcels are Recieved',
+            'students_who_takes_twice_sports_items.php' : 'Students who took Sports Items more than once a day',
+            'busy_sports_items.php' : 'Busy times for Sports Items'
+
+        };
+        const title = titleMap[endpoint];
+        fetchDataAndDisplay(endpoint, 'queryResults', title);
+    });
+    
+    function fetchDataAndDisplay(endpoint, elementId, title) {
+        if (!endpoint) {
+            document.getElementById(elementId).innerHTML = "<p>Please select a query from the dropdown.</p>";
+            return;
+        }
+    
+        fetch(endpoint)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+        })
+        .then(data => {
+            let content = `<h2>${title}</h2>`;
+            if (data.length > 0) {
+                content += `<table><thead><tr>`;
+                Object.keys(data[0]).forEach(key => {
+                    content += `<th>${key}</th>`;
+                });
+                content += `</tr></thead><tbody>`;
+                data.forEach(row => {
+                    content += `<tr>`;
+                    Object.values(row).forEach(value => {
+                        content += `<td style="padding-right: 20px;">${value}</td>`;
+                    });
+                    content += `</tr>`;
+                });
+                content += `</tbody></table>`;
+            } else {
+                content += "<p>No data available for the selected query.</p>";
+            }
+            document.getElementById(elementId).innerHTML = content;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById(elementId).innerHTML = "<p>Error loading data.</p>";
+        });
+    }
+</script>
+
+</body>
+</html>
+
